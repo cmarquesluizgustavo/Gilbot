@@ -1,28 +1,55 @@
 import random
 import datetime
-from gtts      import gTTS
-from playsound import playsound
+import subprocess
+from io import BytesIO
+from gtts import gTTS
 import speech_recognition as sr
 
-def voice_to_text(filepath = "/content/testee.wav", language = "pt-BR"):
-    r          = sr.Recognizer()
-    audio_file = sr.AudioFile(filepath)
+def voice_to_text(filepath, nome, language = "pt-BR"):
+    transcoded_audio = transcode_to_wav(filepath, nome)
+    audio_file = sr.AudioFile(transcoded_audio)
+
+    r = sr.Recognizer()
 
     with audio_file as source:
         user_audio = r.record(source)
 
     text = r.recognize_google(user_audio, language = language)
+    subprocess.run(['rm', transcoded_audio])
 
     return text
 
 
 def make_audio(text, language = "pt-BR"):
     tts = gTTS(text, lang = language)
-    tts.save('/content/resposta.mp3')
+    fp = BytesIO()
+    tts.write_to_fp(fp)
+    fp.seek(0)
+    return fp
 
 
 
-def check_cordialidade(text, nome = "estudante"):
+def transcode_to_wav(voice_data, username = "Estudante"):
+    time_identifier      = str(datetime.datetime.now()).split()[1].replace(":", ".")
+    time_user_identifier = time_identifier + username
+    src_filename  = f'/content/{time_user_identifier}-question.wav'
+    dest_filename = f'/content/{time_user_identifier}-answer.wav'
+
+    f = open(src_filename, "wb")
+    f.write(voice_data)
+    f.close()
+
+    process = subprocess.run(['ffmpeg', '-i', src_filename, dest_filename])
+    if process.returncode != 0:
+        raise Exception("Unable to transcode")
+    subprocess.run(['rm', src_filename])
+    return dest_filename
+
+
+
+
+
+def check_cordialidade(text, nome):
     now = datetime.datetime.now()
     text = text.lower()
     adicionar_a_resposta = []
@@ -47,7 +74,7 @@ def check_cordialidade(text, nome = "estudante"):
             gentiliza = True
 
     if not gentiliza:
-        adicionar_a_resposta.append("mas qual a palavrinha mágica?")
+        adicionar_a_resposta.append("Mas qual a palavrinha mágica?")
     
     if cumprimento:
         adicionar_a_resposta.append("Tudo bem sim, e você?")
@@ -83,8 +110,8 @@ def check_cordialidade(text, nome = "estudante"):
             adicionar_a_resposta.append("boa tarde.")
 
     
-    boa_pergunta = ["boa pergunta ", "ótima pergunta ", 
-                    "excelente pergunta ", "deixa eu te explicar "]
+    boa_pergunta = ["Boa pergunta", "Ótima pergunta", 
+                    "Excelente pergunta", "Deixa eu te explicar"]
     adicionar_a_resposta.append(random.choice(boa_pergunta) +", " +  nome + ". ")
     
 
@@ -100,7 +127,5 @@ def get_answer(pergunta):
     for summon in question_summon:
         if summon in pergunta:
             search_key = pergunta.split(summon)[1]
-            return search_key
+            return wiki_get(search_key)
     return "Não captei sua dúvida"
-
-

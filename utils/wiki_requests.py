@@ -31,9 +31,9 @@ def getFirstParagraph(bs):
     div = bs.find('div', id="mw-content-text").div
     return div.p.text
 
-def main(topic):
+def wiki_get(topic):
     key            = getPageKey(topic)
     bs             = getPageHtml(key)
     firstParagraph = getFirstParagraph(bs)
 
-    print(firstParagraph)
+    return firstParagraph

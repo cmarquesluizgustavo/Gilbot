@@ -5,7 +5,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 # configura o bot
 config = configparser.ConfigParser()
 config.sections()
-config.read('conf/gilbot.conf')
+config.read('gilbot.conf')
 bot = telebot.TeleBot(config['DEFAULTS']['bot_token'])
 
 # lida com a mensagem 'start'

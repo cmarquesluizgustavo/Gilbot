@@ -5,6 +5,7 @@ from io import BytesIO
 from gtts import gTTS
 import speech_recognition as sr
 
+# Recebe um audio e transforma em texto
 def voice_to_text(filepath, nome, language = "pt-BR"):
     transcoded_audio = transcode_to_wav(filepath, nome)
     audio_file = sr.AudioFile(transcoded_audio)
@@ -19,7 +20,7 @@ def voice_to_text(filepath, nome, language = "pt-BR"):
 
     return text
 
-
+# Recebe um texto e transforma em audio
 def make_audio(text, language = "pt-BR"):
     tts = gTTS(text, lang = language)
     fp = BytesIO()
@@ -28,7 +29,7 @@ def make_audio(text, language = "pt-BR"):
     return fp
 
 
-
+# Gera um arquivo de audio do tipo wav
 def transcode_to_wav(voice_data, username = "Estudante"):
     time_identifier      = str(datetime.datetime.now()).split()[1].replace(":", ".")
     time_user_identifier = time_identifier + username
@@ -48,7 +49,7 @@ def transcode_to_wav(voice_data, username = "Estudante"):
 
 
 
-
+# Adiciona um toque mais pessoal a resposta, em busca de soar menos robótico
 def check_cordialidade(text, nome):
     now = datetime.datetime.now()
     text = text.lower()
@@ -121,7 +122,7 @@ def check_cordialidade(text, nome):
 
     return cordialidades
 
-
+# Recebe a pergunta e retorna a resposta, usando a wikipedia
 def get_answer(pergunta):
     question_summon = ["o que é", "me explica", "me ajuda com"]
     for summon in question_summon:

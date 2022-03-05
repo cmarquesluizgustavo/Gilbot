@@ -33,8 +33,8 @@ def make_audio(text, language = "pt-BR"):
 def transcode_to_wav(voice_data, username = "Estudante"):
     time_identifier      = str(datetime.datetime.now()).split()[1].replace(":", ".")
     time_user_identifier = time_identifier + username
-    src_filename  = f'content/{time_user_identifier}-question.wav'
-    dest_filename = f'content/{time_user_identifier}-answer.wav'
+    src_filename  = f'temp/{time_user_identifier}-question.wav'
+    dest_filename = f'temp/{time_user_identifier}-answer.wav'
 
     f = open(src_filename, "wb")
     f.write(voice_data)

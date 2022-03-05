@@ -36,7 +36,7 @@ def transcode_to_wav(voice_data, username = "Estudante"):
     src_filename  = f'content/{time_user_identifier}-question.wav'
     dest_filename = f'content/{time_user_identifier}-answer.wav'
 
-    f = open(src_filename, "w")
+    f = open(src_filename, "wb")
     f.write(voice_data)
     f.close()
 
@@ -123,7 +123,9 @@ def check_cordialidade(text, nome):
     return cordialidades
 
 # Recebe a pergunta e retorna a resposta, usando a wikipedia
-def get_answer(pergunta):
+def get_answer(text):
+    pergunta = text.lower()
+
     question_summon = ["o que é", "me explica", "me ajuda com"]
     for summon in question_summon:
         if summon in pergunta:

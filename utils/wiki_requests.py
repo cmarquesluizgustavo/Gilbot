@@ -33,9 +33,25 @@ def getFirstParagraph(bs):
     div = bs.find('div', id="mw-content-text").div
     return div.p.text
 
-def wiki_get(topic):
-    key            = getPageKey(topic)
-    bs             = getPageHtml(key)
-    firstParagraph = getFirstParagraph(bs)
+# Recebe uma string e retorna a mesma sem artigos
+def removeArticles(topic):
+    artigos = ['a', 'o', 'um', 'uma', 'uns', 'umas', 'as', 'os', 'numa', 'num']
+    topicAsArray = topic.split(' ')
+    topicAsArray = [word for word in topicAsArray if word not in artigos and word != '']
+    topic = ' '.join(topicAsArray)
+    return topic
 
-    return firstParagraph
+def wiki_get(topic):
+    print(topic)
+    topic = removeArticles(topic)
+    print(topic)
+    try:
+        key            = getPageKey(topic)
+        bs             = getPageHtml(key)
+        firstParagraph = getFirstParagraph(bs)
+
+        return firstParagraph
+    except:
+        return 'Não achei nada sobre isso.'
+
+    

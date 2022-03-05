@@ -19,6 +19,11 @@ Depois disso, basta executar o arquivo `main.py` com o comando:
 python3 main.py
 ```
 
+## Requisitos
+
+- Python
+- ffpmeg
+
 ---
 
 ## Licença

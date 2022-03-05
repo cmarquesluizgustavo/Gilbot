@@ -18,7 +18,6 @@ def voice_to_text(filepath, nome, language = "pt-BR"):
 
     text = r.recognize_google(user_audio, language = language)
     subprocess.run(['rm', transcoded_audio])
-
     return text
 
 # Recebe um texto e transforma em audio
@@ -34,10 +33,10 @@ def make_audio(text, language = "pt-BR"):
 def transcode_to_wav(voice_data, username = "Estudante"):
     time_identifier      = str(datetime.datetime.now()).split()[1].replace(":", ".")
     time_user_identifier = time_identifier + username
-    src_filename  = f'/content/{time_user_identifier}-question.wav'
-    dest_filename = f'/content/{time_user_identifier}-answer.wav'
+    src_filename  = f'content/{time_user_identifier}-question.wav'
+    dest_filename = f'content/{time_user_identifier}-answer.wav'
 
-    f = open(src_filename, "wb")
+    f = open(src_filename, "w")
     f.write(voice_data)
     f.close()
 

@@ -44,6 +44,7 @@ def handle_audio(message):
     if message.voice:
         print('Mensagem de voz')
         file_info = bot.get_file(message.voice.file_id)
+        print(file_info)
         answer = question_to_answer(None, file_info.file_path)
 
         # downloaded_file = bot.download_file(file_info.file_path)

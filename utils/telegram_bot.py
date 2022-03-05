@@ -1,6 +1,6 @@
 import configparser
 import telebot
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+# from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # configura o bot
 config = configparser.ConfigParser()
@@ -36,13 +36,14 @@ def handle_about(message):
 def handle_audio(message):
     bot.send_chat_action(message.chat.id, "typing")
     bot.send_chat_action(message.chat.id, "typing")
-    bot.send_message(message.chat.id,"Ouça isso novamente, "+message.chat.first_name)
 
     if message.voice:
+        print('Mensagem de voz')
         file_info = bot.get_file(message.voice.file_id)
         downloaded_file = bot.download_file(file_info.file_path)
         bot.send_voice(message.chat.id, downloaded_file) 
     else:
+        print('Mensagem de audio')
         file_info = bot.get_file(message.audio.file_id)
         downloaded_file = bot.download_file(file_info.file_path)
         bot.send_audio(message.chat.id, downloaded_file)
@@ -57,4 +58,6 @@ def handle_audio(message):
     bot.send_message(message.chat.id, f"Tu falou: <i>{message.text}</i>.\n Foi poético.",  parse_mode="HTML")
 
 print('GilBot ativado')
-bot.polling()
+
+def start_pooling():
+    bot.polling()

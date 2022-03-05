@@ -1,6 +1,6 @@
 import utils.telegram_bot
 import utils.wiki_requests
-import utils.speech_and_text
+from utils.speech_and_text import make_audio, check_cordialidade, get_answer, voice_to_text
 
 # recebe a pergunta por voz ou texto e retorna a resposta via audio
 def question_to_answer(text_question = None, voice_question = None, nome = "Estudante"):

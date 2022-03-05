@@ -13,10 +13,10 @@ bot_token = [SEU_TOKEN]
 
 No qual `[SEU_TOKEN]` é o token retornado pelo Bot Father.
 
-Depois disso, basta executar o arquivo `main_bot.py` com o comando:
+Depois disso, basta executar o arquivo `main.py` com o comando:
 
 ```bash
-python3 main_bot.py
+python3 main.py
 ```
 
 ---

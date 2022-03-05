@@ -4,7 +4,7 @@ import subprocess
 from io import BytesIO
 from gtts import gTTS
 import speech_recognition as sr
-from wiki_requests import wiki_get
+from utils.wiki_requests import wiki_get
 
 # Recebe um audio e transforma em texto
 def voice_to_text(filepath, nome, language = "pt-BR"):

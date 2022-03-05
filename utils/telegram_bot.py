@@ -1,5 +1,6 @@
 import configparser
 import telebot
+from utils.handle_message import question_to_answer
 # from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # configura o bot
@@ -7,6 +8,9 @@ config = configparser.ConfigParser()
 config.sections()
 config.read('gilbot.conf')
 bot = telebot.TeleBot(config['DEFAULTS']['bot_token'])
+
+
+
 
 # lida com a mensagem 'start'
 @bot.message_handler(commands=['start'])
@@ -40,8 +44,10 @@ def handle_audio(message):
     if message.voice:
         print('Mensagem de voz')
         file_info = bot.get_file(message.voice.file_id)
-        downloaded_file = bot.download_file(file_info.file_path)
-        bot.send_voice(message.chat.id, downloaded_file) 
+        answer = question_to_answer(None, file_info.file_path)
+
+        # downloaded_file = bot.download_file(file_info.file_path)
+        bot.send_voice(message.chat.id, answer) 
     else:
         print('Mensagem de audio')
         file_info = bot.get_file(message.audio.file_id)

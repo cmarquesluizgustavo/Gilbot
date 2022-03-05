@@ -1,5 +1,3 @@
-import utils.telegram_bot
-import utils.wiki_requests
 from utils.speech_and_text import make_audio, check_cordialidade, get_answer, voice_to_text
 
 # recebe a pergunta por voz ou texto e retorna a resposta via audio
@@ -15,4 +13,3 @@ def question_to_answer(text_question = None, voice_question = None, nome = "Estu
     resposta_completa = cordialidade + answer
     
     return [make_audio(resposta_completa), resposta_completa]
-

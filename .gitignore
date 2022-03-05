@@ -133,4 +133,4 @@ conf/
 .conf
 
 gilbot.conf
-utils/__pycache__
+utils/__pycache__/

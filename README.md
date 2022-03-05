@@ -4,7 +4,7 @@ Gilbot é um serviço de bot do telegram no qual perguntas recebidas via voz ou 
 
 ## Como usar
 
-Para usar esse bot como seu, basta replicar esse repositório, criar um arquivo gilbot.conf com o seguinte conteúdo:
+Para usar esse bot como seu, basta replicar esse repositório, criar um arquivo gilbot.conf na raiz do repositório com o seguinte conteúdo:
 
 ```
 [DEFAULTS]

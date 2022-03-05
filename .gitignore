@@ -131,3 +131,5 @@ dmypy.json
 #Bot conf
 conf/
 .conf
+
+gilbot.conf

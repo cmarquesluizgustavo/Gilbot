@@ -82,37 +82,38 @@ def check_cordialidade(text, nome):
 
     if now.hour > 8 and now.hour < 15:
         if cordialidades_hora[1] in text:
-            adicionar_a_resposta.append(f"que {cordialidades_hora[1]} o que, bom dia.")
+            adicionar_a_resposta.append(f"Que {cordialidades_hora[1]} o que, bom dia.")
 
         elif cordialidades_hora[2] in text:
-            adicionar_a_resposta.append(f"que {cordialidades_hora[2]} o que, bom dia.")
+            adicionar_a_resposta.append(f"Que {cordialidades_hora[2]} o que, bom dia.")
         
         else:
-            adicionar_a_resposta.append("bom dia.")
+            adicionar_a_resposta.append("Bom dia.")
     
-    elif now.hour > 15:
+    elif now.hour > 15 and now.hour < 21:
         if cordialidades_hora[0] in text:
-            adicionar_a_resposta.append(f"que {cordialidades_hora[0]} o que, boa tarde.")
+            adicionar_a_resposta.append(f"Que {cordialidades_hora[0]} o que, boa tarde.")
 
         elif cordialidades_hora[1] in text:
-            adicionar_a_resposta.append(f"que {cordialidades_hora[2]} o que, boa tarde.")
+            adicionar_a_resposta.append(f"Que {cordialidades_hora[2]} o que, boa tarde.")
         
         else:
-            adicionar_a_resposta.append("boa tarde.")
+            adicionar_a_resposta.append("Boa tarde.")
 
-    elif now.hour > 21 or now.hour < 8:
+    else:
         if cordialidades_hora[0] in text:
-            adicionar_a_resposta.append(f"que {cordialidades_hora[0]} o que, boa noite.")
+            adicionar_a_resposta.append(f"Que {cordialidades_hora[0]} o que, boa noite.")
 
         elif cordialidades_hora[1] in text:
-            adicionar_a_resposta.append(f"que {cordialidades_hora[1]} o que, boa noite.")
+            adicionar_a_resposta.append(f"Que {cordialidades_hora[1]} o que, boa noite.")
 
         else:
-            adicionar_a_resposta.append("boa tarde.")
+            adicionar_a_resposta.append("Boa tarde.")
 
     
     boa_pergunta = ["Boa pergunta", "Ótima pergunta", 
-                    "Excelente pergunta", "Deixa eu te explicar"]
+                    "Excelente pergunta", "Deixa eu te explicar",
+                    "Muito esperto, tinha que ser da UFRJ"]
     adicionar_a_resposta.append(random.choice(boa_pergunta) +", " +  nome + ". ")
     
 

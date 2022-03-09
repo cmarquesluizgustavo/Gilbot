@@ -1,15 +1,10 @@
-import configparser
 import telebot
 from utils.handle_message import question_to_answer
+import os
 # from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # configura o bot
-config = configparser.ConfigParser()
-config.sections()
-config.read('gilbot.conf')
-bot = telebot.TeleBot(config['DEFAULTS']['bot_token'])
-
-
+bot = telebot.TeleBot(os.environ.get('bot_token'))
 
 
 # lida com a mensagem 'start'

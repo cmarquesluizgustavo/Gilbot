@@ -4,28 +4,39 @@ Gilbot é um serviço de bot do telegram no qual perguntas recebidas via voz ou 
 
 ## Como usar
 
-Para usar esse bot como seu, basta replicar esse repositório, criar um arquivo gilbot.conf na raiz do repositório com o seguinte conteúdo:
+- Para usar esse bot como seu, basta replicar esse repositório, criar um arquivo `.env` na raiz do repositório com o seguinte conteúdo:
 
-```
-[DEFAULTS]
-bot_token = [SEU_TOKEN]
-```
+  ```
+  bot_token=[SEU_TOKEN]
+  ```
 
-No qual `[SEU_TOKEN]` é o token retornado pelo Bot Father.
+  No qual `[SEU_TOKEN]` é o token retornado pelo Bot Father.
 
-Depois disso, basta executar o arquivo `main.py` com o comando:
+- Depois disso, precisamos criar a imagem:
 
-```bash
-python3 main.py
-```
+  ```bash
+  docker build -t gilbot:latest .
+  ```
 
-## Requisitos
+  Quando desejar rodar o bot, basta executar os seguintes comandos:
 
-- Python
-- ffpmeg
+  ```bash
+
+  docker run --env-file ./.env --name gilbot --rm -d gilbot:latest
+  ```
+
+- Para parar, basta executar:
+
+  ```bash
+  docker stop gilbot
+  ```
 
 ---
 
 ## Licença
 
 [ISC](./LICENSE)
+
+```
+
+```

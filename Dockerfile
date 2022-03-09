@@ -18,3 +18,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY . .
+
+ENV bot_token None
+
+CMD [ "python3", "main.py" ]

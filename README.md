@@ -15,14 +15,14 @@ Gilbot é um serviço de bot do telegram no qual perguntas recebidas via voz ou 
 - Depois disso, precisamos criar a imagem:
 
   ```bash
-  docker build -t gilbot:latest .
+  docker-compose build gilbot
   ```
 
   Quando desejar rodar o bot, basta executar os seguintes comandos:
 
   ```bash
 
-  docker run --env-file ./.env --name gilbot --rm -d gilbot:latest
+  docker-compose run gilbot
   ```
 
 - Para parar, basta executar:

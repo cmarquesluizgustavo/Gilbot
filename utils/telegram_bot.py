@@ -1,7 +1,7 @@
 import telebot
 from utils.handle_message import question_to_answer
 import os
-# from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # configura o bot
 bot = telebot.TeleBot(os.environ.get('bot_token'))
@@ -19,7 +19,7 @@ def handle_start(message):
 def handle_help(message):
     bot.send_chat_action(message.chat.id, "typing")
     bot.send_chat_action(message.chat.id, "typing")
-    bot.reply_to(message, "Não vou ajudar não")
+    bot.reply_to(message, f"Envie alguma dúvida em áudio ou em mensagem de texto que eu irei te ajudar \U0001F601. Capricha na pergunta, {message.chat.first_name}")
 
 
 # lida com a mensagem 'about'
@@ -27,15 +27,22 @@ def handle_help(message):
 def handle_about(message):
     bot.send_chat_action(message.chat.id, "typing")
     bot.send_chat_action(message.chat.id, "typing")
-    bot.reply_to(message, "Gilbot é um serviço de bot do telegram no qual perguntas recebidas via voz ou arquivo de audio são respondidas com o que a wikipedia souber sobre o assunto.")
-
+    #bot.reply_to(message, "Gilbot é um serviço de bot do telegram no qual perguntas recebidas via voz ou arquivo de áudio são respondidas com o que a wikipedia souber sobre o assunto. " +
+    #                        "O bot foi desenvolvido durante o segundo período de 2021 para a disciplina de Telecomunicações, ministrada pelo professor Fernando Gil Vianna. ")
+    about = "Gilbot é um serviço de bot do telegram no qual perguntas recebidas via voz ou arquivo de áudio são respondidas com o que a wikipedia souber sobre o assunto. O bot foi desenvolvido durante o segundo período de 2021 para a disciplina de Telecomunicações, ministrada pelo professor Fernando Gil Vianna."
+    keyboard = telebot.types.InlineKeyboardMarkup()
+    keyboard.add(telebot.types.InlineKeyboardButton('Entre em contato com os desenvolvedor:', url ='telegram.me/Danyel_C')) #url='telegram.me/DanyelC'))
+    keyboard.add(telebot.types.InlineKeyboardButton('Entre em contato com os desenvolvedor:', url ='telegram.me/cmarquesluizgustavo'))
+    keyboard.add(telebot.types.InlineKeyboardButton('Entre em contato com os desenvolvedor:', url ='telegram.me/Gustavo32123'))
+    bot.send_message(message.chat.id,about,reply_markup=keyboard)
 
 # lida com mensagens de voz ou audio, carro chefe do bot
 @bot.message_handler(content_types=['voice', 'audio'])
 def handle_audio(message):
     bot.send_chat_action(message.chat.id, "typing")
     bot.send_chat_action(message.chat.id, "typing")
-
+    bot.send_message(message.chat.id,"Fala que eu te escuto!")
+    
     if message.voice:
         print('Mensagem de voz')
         file_info = bot.get_file(message.voice.file_id)

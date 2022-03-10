@@ -134,5 +134,4 @@ conf/
 
 gilbot.conf
 utils/__pycache__/
-temp/*
 content/

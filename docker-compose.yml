@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+    gilbot:
+        #stdin_open: true # docker run -i
+        #tty: true
+        environment:
+            - bot_token=${bot_token}
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command:
+            - bash
+            - -c
+            - python3 main.py

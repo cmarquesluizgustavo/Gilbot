@@ -1,3 +1,4 @@
+import string
 import random
 import datetime
 import subprocess
@@ -126,10 +127,12 @@ def check_cordialidade(text, nome):
 # Recebe a pergunta e retorna a resposta, usando a wikipedia
 def get_answer(text):
     pergunta = text.lower()
+    punctuation_remover = str.maketrans('', '', string.punctuation)
 
     question_summon = ["o que é", "me explica", "me ajuda com"]
     for summon in question_summon:
         if summon in pergunta:
             search_key = pergunta.split(summon)[1]
+            search_key = search_key.translate(punctuation_remover)
             return wiki_get(search_key)
     return "Não captei sua dúvida"

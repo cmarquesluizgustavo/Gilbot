@@ -19,6 +19,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ENV bot_token None
+ENV bot_token=${bot_token}
 
-CMD [ "python3", "main.py" ]
+#CMD [ "python3", "main.py" ]
